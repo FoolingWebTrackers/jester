@@ -56,7 +56,10 @@ export default {
     return {
       iconSrc: "../../public/icon-128.png",
       tabIds: [],
-      personas: personasData,
+      personas: personasData.map((persona) => ({
+        ...persona,
+        photo: persona.photo,
+      })),
     };
   },
   methods: {

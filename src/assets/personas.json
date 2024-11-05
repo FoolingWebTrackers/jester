@@ -1,9 +1,9 @@
 [
     {
       "id": 1,
-      "name": "Persona 1",
-      "description": "Description of Persona 1",
-      "photo": "path/to/photo1.jpg",    
+      "name": "Post Nuclear War Survivalist",
+      "description": "A person who is preparing for a nuclear war and its aftermath.",
+      "photo": "profilePhotos/doomguy.jpg",    
       "urls": [        
       "https://time.com/6159942/amazon-potassium-iodide-nuclear-products-ukraine-invasion/",
       "https://www.ncbi.nlm.nih.gov/books/NBK219185/",
