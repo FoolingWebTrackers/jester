@@ -38,7 +38,7 @@
           <h3 class="persona-name">{{ persona.name }}</h3>
           <p class="persona-description">{{ persona.description }}</p>
         </div>
-        <button class="select-button" @click="selectPersona(persona)">
+        <button class="select-button" @click="openTabsInSequence(postNuclearWarSurvivorLinks)">
           Select
         </button>
       </div>
@@ -173,7 +173,9 @@ export default {
         : "https://www.youtube.com";
       chrome.tabs.create({ url });
     },
+    
     openTabsInSequence(urls) {
+      //TODO Open tabs one by one,close them after render
       this.tabIds = [];
 
       for (const url of urls) {
