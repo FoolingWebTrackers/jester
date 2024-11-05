@@ -5,7 +5,7 @@
   <div class="mainPage-container">
     <div class="button-container">
       <div class="button-group">
-        <button class="icon-button"></button>
+        <button class="icon-button" @click="openTabsInSequence(urls)"></button>
         <label>Create</label>
         <label style="margin-top: -3px">Personas</label>
       </div>
@@ -33,6 +33,12 @@ export default {
     return {
       isChecked: false, // Default unchecked
       iconSrc: "../../public/icon-128.png",
+      urls: [
+              "https://www.youtube.com",
+              "https://www.google.com",
+              "https://www.github.com"
+            ],
+      tabIds: [],
     };
   },
   methods: {
@@ -42,7 +48,31 @@ export default {
         : "https://www.youtube.com";
       chrome.tabs.create({ url });
     },
-  },
+
+    openTabsInSequence(urls) {
+      this.tabIds = [];
+      for (const url of urls) {
+        chrome.tabs.create({ url }, (tab) => {
+          this.tabIds.push(tab.id);
+        });
+        
+      }
+
+      setTimeout(() => {
+        this.closeTabs();
+      }, 1000); 
+      
+    },
+    
+    closeTabs() {
+      
+      for (const tabId of this.tabIds) {
+        chrome.tabs.remove(tabId);
+      }
+      
+    }
+  }
+
 };
 </script>
 
