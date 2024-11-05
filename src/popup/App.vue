@@ -35,8 +35,10 @@
       <div v-for="persona in personas" :key="persona.id" class="persona-box">
         <img :src="persona.photo" alt="Persona Photo" class="persona-photo" />
         <div class="persona-info">
-          <h3 class="persona-name">{{ persona.name }}</h3>
-          <p class="persona-description">{{ persona.description }}</p>
+          <h3 class="persona-name unselectable">{{ persona.name }}</h3>
+          <p class="persona-description unselectable">
+            {{ persona.description }}
+          </p>
         </div>
         <button class="select-button" @click="selectPersona(persona)">
           Select
@@ -124,6 +126,12 @@ export default {
 label {
   margin-top: 5px; /* Space between button and label */
   color: #d1d1d1; /* Adjust label color as needed */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 input {
@@ -228,6 +236,14 @@ input {
   font-size: 20px;
   position: relative;
   color: #d1d1d1;
+}
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 </style>
 <style>
