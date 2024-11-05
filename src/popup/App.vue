@@ -55,11 +55,6 @@ export default {
   data() {
     return {
       iconSrc: "../../public/icon-128.png",
-      urls: [
-        "https://www.youtube.com",
-        "https://www.google.com",
-        "https://www.github.com",
-      ],
       tabIds: [],
       personas: personasData,
     };
