@@ -1,61 +1,56 @@
 <template>
-  <div class="mainPage-header">
-    <img :src="require('@/assets/icon-128.png')" alt="Icon" class="icon" />
-  </div>
-  <div class="mainPage-container">
-    <div class="button-container">
-      <div class="button-group">
-        <button class="icon-button">
-          <i class="fa-solid fa-plus"></i>
-        </button>
-        <label>Create</label>
-        <label style="margin-top: -3px">Personas</label>
-      </div>
-      <div class="button-group">
-        <button class="icon-button">
-          <i class="fa-solid fa-microphone"></i>
-        </button>
-        <label>Fake Mic</label>
-      </div>
-      <div class="button-group">
-        <button class="icon-button">
-          <i class="fa-solid fa-user"></i>
-        </button>
-        <label>Profile</label>
-      </div>
-      <div class="button-group">
-        <button class="icon-button">
-          <i class="fa-solid fa-gear"></i>
-        </button>
-        <label>Settings</label>
-      </div>
+  <div class="button-container">
+    <div class="button-group">
+      <button class="icon-button" @click="openCreatePersona">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      <label>Create</label>
+      <label style="margin-top: -3px">Personas</label>
     </div>
-    <!-- Persona Container -->
-    <div class="persona-container">
-      <div v-for="persona in personas" :key="persona.id" class="persona-box">
-        <img :src="persona.photo" alt="Persona Photo" class="persona-photo" />
-        <div class="persona-info">
-          <h3 class="persona-name unselectable">{{ persona.name }}</h3>
-          <p class="persona-description unselectable">
-            {{ persona.description }}
-          </p>
-        </div>
-        <button class="select-button" @click="selectPersona(persona)">
-          Select
-        </button>
-      </div>
+    <div class="button-group">
+      <button class="icon-button">
+        <i class="fa-solid fa-microphone"></i>
+      </button>
+      <label>Fake Mic</label>
+    </div>
+    <div class="button-group">
+      <button class="icon-button">
+        <i class="fa-solid fa-user"></i>
+      </button>
+      <label>Profile</label>
+    </div>
+    <div class="button-group">
+      <button class="icon-button">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+      <label>Settings</label>
     </div>
   </div>
-
-  <div class="mainPage-footer unselectable">Jester</div>
+  <!-- Persona Container -->
+  <div class="persona-container">
+    <div v-for="persona in personas" :key="persona.id" class="persona-box">
+      <img :src="persona.photo" alt="Persona Photo" class="persona-photo" />
+      <div class="persona-info">
+        <h3 class="persona-name unselectable">{{ persona.name }}</h3>
+        <p class="persona-description unselectable">
+          {{ persona.description }}
+        </p>
+      </div>
+      <button class="select-button" @click="selectPersona(persona)">
+        Select
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
 /* global chrome */
 import personasData from "@/assets/personas.json";
 export default {
+  name: "mainPage",
   data() {
     return {
+      currentComponent: "mainPage",
       iconSrc: "../../public/icon-128.png",
       tabIds: [],
       personas: personasData.map((persona) => ({
@@ -90,6 +85,10 @@ export default {
       for (const tabId of this.tabIds) {
         chrome.tabs.remove(tabId);
       }
+    },
+    openCreatePersona() {
+      console.log("event send");
+      this.$emit("open-create-persona"); // Emit an event to the parent
     },
   },
 };
@@ -203,34 +202,6 @@ input {
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
-}
-.mainPage-footer {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  background: #383636;
-  box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.5);
-  color: #761626;
-  font-size: 15pt;
-}
-.mainPage-header {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #383636;
-  height: 70px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-}
-.mainPage-container {
-  display: flow-root;
-  width: 300px;
-  height: 500px;
-  background: #1e1e1e;
-  margin: 0 px;
-  padding: 0px;
 }
 .fa-solid {
   font-size: 20px;
