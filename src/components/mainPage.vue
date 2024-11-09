@@ -50,7 +50,6 @@ export default {
   name: "mainPage",
   data() {
     return {
-      currentComponent: "mainPage",
       iconSrc: "../../public/icon-128.png",
       tabIds: [],
       personas: personasData.map((persona) => ({
