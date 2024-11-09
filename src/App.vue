@@ -2,10 +2,11 @@
   <div class="mainPage-header">
     <img :src="require('@/assets/icon-128.png')" alt="Icon" class="icon" />
   </div>
+
   <div class="mainPage-container">
-    <transition name="fade" mode="out-in">
-      <component :is="currentView" @open-create-persona="toggleComponent" />
-    </transition>
+    <Transition>
+      <component :is="currentView" @open-create-persona="openCreatePersona" />
+    </Transition>
   </div>
   <div class="mainPage-footer unselectable">Jester</div>
 </template>
@@ -31,16 +32,28 @@ export default {
     };
   },
   methods: {
-    toggleComponent() {
-      console.log("recieved emit.");
-      this.currentView =
-        this.currentView === "mainPage" ? "createPersona" : "mainPage";
+    openCreatePersona() {
+      console.log("openCreatePersona method called"); // Check if this logs
+      this.currentView = "createPersona";
+      console.log("currentView set to:", this.currentView); // Verify currentView change
     },
   },
 };
 </script>
 
 <style scoped>
+.v-move,
+.v-enter-active,
+.v-leave-active {
+  transition: 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 .icon {
   width: 45px; /* Adjust the size as needed */
   height: auto; /* Maintain aspect ratio */
