@@ -55,7 +55,7 @@ import personasData from "@/assets/personas.json";
 import mainPage from "@/components/personaList.vue";
 import createPersona from "@/components/createPersona.vue";
 import fakeMic from "@/components/fakeMic.vue";
-import profile from "@/components/appProfile.vue";
+import appProfile from "@/components/appProfile.vue";
 import settings from "@/components/appSettings.vue";
 
 export default {
@@ -63,7 +63,7 @@ export default {
     mainPage,
     createPersona,
     fakeMic,
-    profile,
+    appProfile,
     settings,
   },
   data() {
@@ -88,7 +88,7 @@ export default {
       this.currentView = "fakeMic";
     },
     openProfile() {
-      this.currentView = "profile";
+      this.currentView = "appProfile";
     },
     openSettings() {
       this.currentView = "settings";
