@@ -1,31 +1,4 @@
 <template>
-  <div class="button-container">
-    <div class="button-group">
-      <button class="icon-button" @click="openCreatePersona">
-        <i class="fa-solid fa-plus"></i>
-      </button>
-      <label>Create</label>
-      <label style="margin-top: -3px">Personas</label>
-    </div>
-    <div class="button-group">
-      <button class="icon-button">
-        <i class="fa-solid fa-microphone"></i>
-      </button>
-      <label>Fake Mic</label>
-    </div>
-    <div class="button-group">
-      <button class="icon-button">
-        <i class="fa-solid fa-user"></i>
-      </button>
-      <label>Profile</label>
-    </div>
-    <div class="button-group">
-      <button class="icon-button">
-        <i class="fa-solid fa-gear"></i>
-      </button>
-      <label>Settings</label>
-    </div>
-  </div>
   <!-- Persona Container -->
   <div class="persona-container">
     <div v-for="persona in personas" :key="persona.id" class="persona-box">
@@ -79,15 +52,10 @@ export default {
         this.closeTabs();
       }, 1000);
     },
-
     closeTabs() {
       for (const tabId of this.tabIds) {
         chrome.tabs.remove(tabId);
       }
-    },
-    openCreatePersona() {
-      console.log("event send");
-      this.$emit("open-create-persona"); // Emit an event to the parent
     },
   },
 };
