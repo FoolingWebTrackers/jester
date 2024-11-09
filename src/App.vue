@@ -141,8 +141,8 @@ export default {
 }
 
 label {
-  margin-top: 5px; /* Space between button and label */
-  color: #d1d1d1; /* Adjust label color as needed */
+  margin-top: 5px;
+  color: #d1d1d1;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
