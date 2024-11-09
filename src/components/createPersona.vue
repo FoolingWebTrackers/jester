@@ -22,7 +22,10 @@
 export default {
   name: "createPersona",
   data() {
-    return {};
+    return {
+      generateDesc: true,
+      generatePhoto: false,
+    };
   },
   methods: {},
 };
