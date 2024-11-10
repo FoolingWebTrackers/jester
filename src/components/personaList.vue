@@ -10,13 +10,17 @@
       />
       <div class="persona-info">
         <h3 class="persona-name unselectable">{{ persona.name }}</h3>
-        <p class="persona-description unselectable">
-          {{ persona.description }}
-        </p>
       </div>
       <button class="select-button" @click="selectPersona(persona)">
         Select
       </button>
+      <Transition mode="out-in">
+        <personaDetail
+          v-if="selectedPersona"
+          :persona="selectedPersona"
+          @close="selectedPersona = null"
+        />
+      </Transition>
     </div>
   </div>
 </template>
@@ -24,12 +28,16 @@
 <script>
 /* global chrome */
 import personasData from "@/assets/personas.json";
+import personaDetail from "@/components/personaDetail.vue";
 export default {
-  name: "mainPage",
+  components: {
+    personaDetail,
+  },
+  name: "personaList",
   data() {
     return {
       iconSrc: "../../public/icon-128.png",
-      tabIds: [],
+      selectedPersona: null,
       personas: personasData.map((persona) => ({
         ...persona,
         photo: persona.photo,
@@ -39,23 +47,7 @@ export default {
   methods: {
     selectPersona(persona) {
       // Implement logic for selecting a persona
-      this.openTabsInSequence(persona.urls);
-    },
-    openTabsInSequence(urls) {
-      //TODO Open tabs one by one,close them after render
-      this.tabIds = [];
-
-      for (const url of urls) {
-        setTimeout(() => {
-          chrome.tabs.create({ url }, (tab) => {
-            this.tabIds.push(tab.id);
-          });
-        }, 1000);
-      }
-
-      setTimeout(() => {
-        this.closeTabs();
-      }, 1000);
+      this.selectedPersona = persona;
     },
     closeTabs() {
       for (const tabId of this.tabIds) {
@@ -70,6 +62,18 @@ export default {
 </script>
 
 <style scoped>
+.v-move,
+.v-enter-active,
+.v-leave-active {
+  transition: 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 .icon {
   width: 45px; /* Adjust the size as needed */
   height: auto; /* Maintain aspect ratio */
@@ -139,6 +143,7 @@ input {
 }
 
 .persona-box {
+  height: fit-content;
   display: flex;
   align-items: center;
   background-color: #2e2e2e;
@@ -147,6 +152,7 @@ input {
   padding: 10px;
   margin: 10px;
   width: 90%;
+  min-height: 63px;
 }
 
 .persona-photo {
@@ -163,11 +169,6 @@ input {
 .persona-name {
   font-size: 16px;
   color: #d1d1d1;
-}
-
-.persona-description {
-  font-size: 12px;
-  color: #b0b0b0;
 }
 
 .select-button {

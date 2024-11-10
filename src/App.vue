@@ -179,11 +179,6 @@ label {
   margin: 0 px;
   padding: 0px;
 }
-.fa-solid {
-  font-size: 20px;
-  position: relative;
-  color: #d1d1d1;
-}
 .icon {
   width: 45px; /* Adjust the size as needed */
   height: auto; /* Maintain aspect ratio */
@@ -237,5 +232,10 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.fa-solid {
+  font-size: 20px;
+  position: relative;
+  color: #d1d1d1;
 }
 </style>
