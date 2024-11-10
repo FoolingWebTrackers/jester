@@ -1,21 +1,25 @@
 <template>
   <div class="create-persona-container">
-    <input type="text" placeholder="Persona Name" class="persona-name-input" />
+    <input
+      type="text"
+      placeholder="Persona Name"
+      class="persona-name-input unselectable"
+    />
     <input
       type="text"
       placeholder="Persona Description"
-      class="persona-description-input"
+      class="persona-description-input unselectable"
       :disabled="generateDesc"
     />
     <div class="checkbox-container">
       <input type="checkbox" v-model="generateDesc" />
-      <label>AI generated description</label>
+      <label class="unselectable">AI generated description</label>
     </div>
     <div class="checkbox-container">
       <input type="checkbox" v-model="generatePhoto" />
-      <label>AI generated photo</label>
+      <label class="unselectable">AI generated photo</label>
     </div>
-    <button class="create-persona-button">Create Persona</button>
+    <button class="create-persona-button unselectable">Create Persona</button>
   </div>
 </template>
 <script>
@@ -67,6 +71,7 @@ input[type="text"]:disabled {
   justify-content: left;
 }
 input[type="checkbox"] {
+  display: flex;
   appearance: none;
   width: 30px;
   height: 30px;
@@ -87,5 +92,45 @@ input[type="checkbox"]:checked + label {
   -o-transition: color 0.2s ease-out;
   -ms-transition: color 0.2s ease-out;
   transition: color 0.2s ease-out;
+}
+input[type="checkbox"]::after {
+  content: "";
+  position: relative;
+  top: 1px;
+  left: 9px;
+  width: 7px;
+  height: 18px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: scale(0) rotate(178deg);
+  transition: transform 0.2s ease-in-out;
+  opacity: 0;
+}
+
+input[type="checkbox"]:checked::after {
+  transform: scale(1) rotate(45deg);
+  opacity: 1;
+}
+.create-persona-button {
+  background-color: #383636;
+  color: #d1d1d1;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.create-persona-button:hover {
+  background-color: #4a0000;
+  color: #ff0000;
+}
+.create-persona-button:active {
+  background-color: #ff0000;
+  color: #d1d1d1;
 }
 </style>

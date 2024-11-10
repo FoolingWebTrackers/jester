@@ -184,14 +184,6 @@ label {
   position: relative;
   color: #d1d1d1;
 }
-.unselectable {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 .icon {
   width: 45px; /* Adjust the size as needed */
   height: auto; /* Maintain aspect ratio */
@@ -237,5 +229,13 @@ body {
   width: 300px;
   height: 600px;
   background: transparent;
+}
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 </style>
