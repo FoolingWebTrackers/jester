@@ -8,7 +8,7 @@
       :disabled="generateDesc"
     />
     <div class="checkbox-container">
-      <input type="checkbox" v-model="generateDesc" ></input>
+      <input type="checkbox" v-model="generateDesc" />
       <label>AI generated description</label>
     </div>
     <div class="checkbox-container">
