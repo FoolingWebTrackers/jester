@@ -78,7 +78,7 @@ input[type="checkbox"] {
   border: 2px solid #383636;
   border-radius: 4px;
   background-color: transparent;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
   cursor: pointer;
 }
 input[type="checkbox"]:checked {
@@ -123,7 +123,7 @@ input[type="checkbox"]:checked::after {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 .create-persona-button:hover {
   background-color: #4a0000;
