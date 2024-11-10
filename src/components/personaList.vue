@@ -2,7 +2,12 @@
   <!-- Persona Container -->
   <div class="persona-container">
     <div v-for="persona in personas" :key="persona.id" class="persona-box">
-      <img :src="persona.photo" alt="Persona Photo" class="persona-photo" />
+      <img
+        :src="persona.photo"
+        alt="Persona Photo"
+        class="persona-photo"
+        @error="setDefaultPhoto(persona)"
+      />
       <div class="persona-info">
         <h3 class="persona-name unselectable">{{ persona.name }}</h3>
         <p class="persona-description unselectable">
@@ -56,6 +61,9 @@ export default {
       for (const tabId of this.tabIds) {
         chrome.tabs.remove(tabId);
       }
+    },
+    setDefaultPhoto(persona) {
+      persona.photo = require("@/assets/default.webp");
     },
   },
 };
