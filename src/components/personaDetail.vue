@@ -15,39 +15,94 @@
     <button class="select-persona-button" @click="selectPersona(persona)">
       Select Persona
     </button>
+    <Transition mode="out-in">
+      <info-modal
+        :message="message"
+        :isPositive="isPositive"
+        @closeInfoModal="closeInfoModal"
+        v-if="infoModal"
+      ></info-modal
+    ></Transition>
   </div>
 </template>
 
 <script>
+import InfoModal from "./infoModal.vue";
+
 export default {
+  name: "personaDetail",
+  components: { InfoModal },
   props: ["persona"],
+  data() {
+    return {
+      infoModal: false,
+      message: "",
+      isPositive: false,
+    };
+  },
   methods: {
     closeDetail() {
       this.$emit("close");
+    },
+    closeInfoModal() {
+      this.infoModal = false;
     },
     selectPersona(persona) {
       // Implement logic for selecting a persona
       this.openTabsInSequence(persona.urls);
     },
-    openTabsInSequence(urls) {
-      //TODO Open tabs one by one,close them after render
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ urls: urls }),
-      };
-      fetch("http://localhost:3000/browse", requestOptions).then((response) =>
-        response.json()
-      );
+    async openTabsInSequence(urls) {
+      try {
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ urls: urls }),
+        };
+
+        const response = await fetch(
+          "http://localhost:3000/browse",
+          requestOptions
+        );
+        //const data = await response.json();
+
+        if (response.status === 200) {
+          this.message = "Tabs opened successfully!";
+          this.isPositive = true;
+        } else {
+          this.message = "Failed to open tabs!";
+          this.isPositive = false;
+        }
+        this.infoModal = true;
+      } catch (error) {
+        this.message = "Failed to open tabs!";
+        this.isPositive = false;
+        this.infoModal = true;
+        console.log(error);
+        console.log("Failed to open tabs!");
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-/* Add styling for detailed view */
+.v-move,
+.v-enter-active,
+.v-leave-active {
+  transition: 1s ease;
+}
+
+.v-enter-from{
+  opacity: 0;
+  transform: translateX(30px);
+}
+.v-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
 .persona-detail {
   position: fixed;
   top: 188px;
