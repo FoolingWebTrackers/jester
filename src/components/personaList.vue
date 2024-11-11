@@ -150,7 +150,7 @@ input {
   border: 1px solid #383636;
   border-radius: 5px;
   padding: 10px;
-  margin: 10px;
+  margin: 2px;
   width: 90%;
   min-height: 63px;
 }
